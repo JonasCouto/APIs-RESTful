@@ -5,12 +5,14 @@ const porta = 3000;
 
 //rotas
 const carroRota = require('./rotas/carrosRota')
-
+const clienteRota = require('./rotas/clienteRota')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false})); 
 
+//ROTAS
 app.use('/carros', carroRota);
+app.use('/clientes', clienteRota);
 
 
 

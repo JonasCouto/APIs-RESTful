@@ -2,13 +2,13 @@ const express =require('express');
 const router = express.Router();
 
 
-const carroController = require('../controller/carroController')
+const controller = require('../controller/carroController')
 
 
 
 
 // Rota para LISTar TODOS CARROS
-router.get('/', carroController.listar)
+router.get('/', controller.listar)
 
 // Rota para INSERIR veiculo
 // router.post('/', (req, res)=>{

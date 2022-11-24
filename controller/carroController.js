@@ -2,7 +2,7 @@
 const carroPersistencia = require('../persistencia/carroPersistencia');
 
 
-exports.listar = async (req, res)=>{
+exports.listar = (req, res)=>{
     carroPersistencia.listar((err, listaCarros)=>{
         if(err){
             return res.status(500).json({error: err.message});

@@ -8,7 +8,7 @@ const carroRota = require('./rotas/carrosRota')
 const clienteRota = require('./rotas/clienteRota')
 
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false})); 
+app.use(bodyParser.urlencoded({extended:false})); 
 
 //ROTAS
 app.use('/carros', carroRota);

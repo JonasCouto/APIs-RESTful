@@ -9,12 +9,13 @@ const conexao = {
 }
 
 
-// Listar carros
+
+
 exports.listar = (callback)=>{
     const cliente = new Client(conexao);
     cliente.connect();
 
-    const sql = "SELECT * FROM carros";
+    const sql = "select * from clientes";
     cliente.query(sql, (err, result)=>{
         if(err){
             callback(err, undefined);
@@ -26,14 +27,15 @@ exports.listar = (callback)=>{
     })
 }
 
-// Adicionar carros
-exports.adicionar = (carro, callback)=>{
+
+// Adicionar clientes
+exports.adicionar = (cliente, callback)=>{
     const conn = new Client(conexao);
     conn.connect();
 
-    const sql = "INSERT INTO carros (nome, marca, cor, placa, preco) VALUES ($1, $2, $3, $4, $5) RETURNING *";
+    const sql = "INSERT INTO clientes (nome, email, cpf, telefone, idade, endereco) VALUES ($1, $2, $3, $4, $5, $6) RETURNING *";
 
-    const values = [carro.nome, carro.marca, carro.cor, carro.placa, carro.preco]
+    const values = [cliente.nome, cliente.email, cliente.cpf, cliente.telefone, cliente.idade, cliente.endereco]
 
     conn.query(sql, values, (err, result) => {
         if(err){
@@ -46,12 +48,12 @@ exports.adicionar = (carro, callback)=>{
 }
 
 
-// localizar carro especificado
+// localizar cliente especificado
 exports.buscarPorId = (id, callback)=>{
     const conn = new Client(conexao);
     conn.connect();
 
-    const sql = "SELECT * FROM carros WHERE cod_carro=$1";
+    const sql = "SELECT * FROM clientes WHERE cod_cliente=$1";
 
     const values = [id];
 
@@ -66,13 +68,13 @@ exports.buscarPorId = (id, callback)=>{
     })   
 }
 
-// atualiza carro especificado
-exports.atualizar = (id, carro, callback) => {
+// atualiza cliente especificado
+exports.atualizar = (id, cliente, callback) => {
     const conn = new Client(conexao);
     conn.connect();
     
-    const sql = "UPDATE carros SET nome=$1, marca=$2, cor=$3, placa=$4, preco=$5 WHERE cod_carro=$6 RETURNING *"
-    const values = [carro.nome, carro.marca, carro.cor, carro.placa, carro.preco, id];
+    const sql = "UPDATE clientes SET nome=$1, email=$2, cpf=$3, telefone=$4, idade=$5, endereco=$6 WHERE cod_cliente=$7 RETURNING *"
+    const values = [cliente.nome, cliente.email, cliente.cpf, cliente.telefone, cliente.idade, cliente.endereco, id];
 
     conn.query(sql, values, (err, result) => {
         if(err) {
@@ -89,7 +91,7 @@ exports.excluir = (id, callback) => {
     const conn = new Client(conexao);
     conn.connect();
     
-    const sql = "DELETE FROM carros WHERE cod_carro=$1 RETURNING *"
+    const sql = "DELETE FROM clientes WHERE cod_cliente=$1 RETURNING *"
     const values = [id];
 
     conn.query(sql, values, (err, result) => {
@@ -102,4 +104,3 @@ exports.excluir = (id, callback) => {
         conn.end();
     })
 }
-

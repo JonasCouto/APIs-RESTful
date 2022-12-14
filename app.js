@@ -1,7 +1,9 @@
 const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
+const cors = require('cors');
 const porta = 3000;
+
 
 //rotas
 const carroRota = require('./rotas/carrosRota')
@@ -9,6 +11,7 @@ const clienteRota = require('./rotas/clienteRota')
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended:false})); 
+app.use(cors());
 
 //ROTAS
 app.use('/carros', carroRota);
